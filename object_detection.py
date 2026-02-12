@@ -3,6 +3,7 @@ import numpy as np
 from collections import defaultdict, Counter
 import time
 import platform
+print("helo world - object_detection.py:6")
 
 # ============================================================
 # 4-SNAPSHOT SCAN -> 3x3 GRID (AGENT at [1][1])
@@ -74,7 +75,7 @@ def beep():
             import winsound
             winsound.Beep(1200, 120)
         else:
-            print("\a - tilecolordetection.py:77", end="")
+            print("\a  tilecolordetection.py:77 - object_detection.py:78", end="")
     except Exception:
         pass
 
@@ -427,17 +428,17 @@ def open_camera(index=0):
 def main():
     cap = open_camera(CAMERA_INDEX)
     if not cap.isOpened():
-        print("ERROR: Cannot open camera. - tilecolordetection.py:430")
+        print("ERROR: Cannot open camera.  tilecolordetection.py:430 - object_detection.py:431")
         return
 
     grid = VoteGrid3x3()
     heading_index = 0
     show_debug = False
 
-    print("Instructions: - tilecolordetection.py:437")
-    print("Put agent at center of 3x3 tiles. - tilecolordetection.py:438")
-    print("Press 'c' at FRONT, then turn ~90° RIGHT and press 'c', repeat for BACK and LEFT. - tilecolordetection.py:439")
-    print("Keys: c=capture  r=reset  d=debug  q=quit\n - tilecolordetection.py:440")
+    print("Instructions:  tilecolordetection.py:437 - object_detection.py:438")
+    print("Put agent at center of 3x3 tiles.  tilecolordetection.py:438 - object_detection.py:439")
+    print("Press 'c' at FRONT, then turn ~90° RIGHT and press 'c', repeat for BACK and LEFT.  tilecolordetection.py:439 - object_detection.py:440")
+    print("Keys: c=capture  r=reset  d=debug  q=quit\n  tilecolordetection.py:440 - object_detection.py:441")
 
     while True:
         ok, frame = cap.read()
@@ -499,15 +500,15 @@ def main():
         elif key == ord("r"):
             grid = VoteGrid3x3()
             heading_index = 0
-            print("\n=== Reset scan === - tilecolordetection.py:502")
+            print("\n=== Reset scan ===  tilecolordetection.py:502 - object_detection.py:503")
             beep()
         elif key == ord("c"):
             if heading_index >= 4:
-                print("Already completed 4 captures. Press 'r' to rescan. - tilecolordetection.py:506")
+                print("Already completed 4 captures. Press 'r' to rescan.  tilecolordetection.py:506 - object_detection.py:507")
                 continue
 
             heading_name = HEADING_NAMES[heading_index]
-            print(f"\n=== Capturing heading: {heading_name} (hold steady) === - tilecolordetection.py:510")
+            print(f"\n=== Capturing heading: {heading_name} (hold steady) ===  tilecolordetection.py:510 - object_detection.py:511")
             beep()
 
             labels_3 = capture_heading(cap, seconds=CAPTURE_SECONDS)
@@ -516,16 +517,16 @@ def main():
                 if label != "UNK":
                     grid.add(gx, gy, label)
 
-            print(f"Observed (left>right): {labels_3} - tilecolordetection.py:519")
+            print(f"Observed (left>right): {labels_3}  tilecolordetection.py:519 - object_detection.py:520")
             heading_index += 1
             beep()
 
             if heading_index == 4:
                 final_mat = grid.matrix()
-                print("\n=== Scan complete === - tilecolordetection.py:525")
-                print("3x3 matrix (AGENT at [1][1]): - tilecolordetection.py:526")
+                print("\n=== Scan complete ===  tilecolordetection.py:525 - object_detection.py:526")
+                print("3x3 matrix (AGENT at [1][1]):  tilecolordetection.py:526 - object_detection.py:527")
                 print_matrix(final_mat)
-                print("\nLegend: row0=FRONT, row2=BACK | col0=LEFT, col2=RIGHT\n - tilecolordetection.py:528")
+                print("\nLegend: row0=FRONT, row2=BACK | col0=LEFT, col2=RIGHT\n  tilecolordetection.py:528 - object_detection.py:529")
 
     cap.release()
     cv2.destroyAllWindows()
